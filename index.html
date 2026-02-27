@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Rutina Alimenticia | Rupertíña</title>
+  <meta name="description" content="Rutina alimenticia (Sopa 1, desayuno y cena) para Rupertíña. Compatible con PC y móviles." />
+  <style>
+    :root{
+      --bg1:#0b1220;
+      --bg2:#0f1b33;
+      --card: rgba(255,255,255,.10);
+      --card2: rgba(255,255,255,.06);
+      --stroke: rgba(255,255,255,.14);
+      --text:#eaf0ff;
+      --muted: rgba(234,240,255,.78);
+      --shadow: 0 20px 60px rgba(0,0,0,.45);
+      --glow: 0 0 0 1px rgba(255,255,255,.10), 0 18px 55px rgba(0,0,0,.35);
+      --radius: 18px;
+      --radius2: 14px;
+      --ok:#2ee59d;
+      --warn:#ffcc66;
+    }
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg1:#f4f7ff;
+        --bg2:#e9eeff;
+        --card: rgba(255,255,255,.82);
+        --card2: rgba(255,255,255,.60);
+        --stroke: rgba(10,20,40,.10);
+        --text:#0a1430;
+        --muted: rgba(10,20,48,.68);
+        --shadow: 0 18px 50px rgba(10,20,40,.12);
+        --glow: 0 0 0 1px rgba(10,20,40,.08), 0 20px 50px rgba(10,20,40,.10);
+      }
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color: var(--text);
+      background:
+        radial-gradient(1200px 600px at 15% 10%, rgba(124,92,255,.35), transparent 55%),
+        radial-gradient(900px 500px at 90% 20%, rgba(25,211,255,.25), transparent 55%),
+        radial-gradient(800px 500px at 50% 90%, rgba(46,229,157,.18), transparent 55%),
+        linear-gradient(160deg, var(--bg1), var(--bg2));
+      padding: 18px;
+    }
+    .wrap{max-width: 980px; margin: 0 auto;}
+    .top{
+      display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
+      padding: 14px 14px;
+      border-radius: var(--radius);
+      border:1px solid var(--stroke);
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.06));
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+    .brand{display:flex; gap:12px; align-items:center;}
+    .logo{
+      width:44px;height:44px;border-radius:14px;
+      background: linear-gradient(135deg, rgba(124,92,255,.95), rgba(25,211,255,.75));
+      display:grid; place-items:center; font-size: 22px;
+      box-shadow: var(--glow);
+      user-select:none;
+    }
+    h1{margin:0; font-size:18px; letter-spacing:.2px;}
+    .sub{margin:4px 0 0; color: var(--muted); font-size:13px;}
+    .creditPill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 10px 12px; border-radius: 999px;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.06);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0,0,0,.16);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .section{
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: var(--radius);
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.06);
+      box-shadow: 0 10px 35px rgba(0,0,0,.18);
+      backdrop-filter: blur(12px);
+    }
+    .section h2{
+      margin:0 0 10px;
+      font-size: 17px;
+      display:flex; align-items:center; gap:10px;
+    }
+    .tag{
+      display:inline-flex; align-items:center; gap:6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border:1px solid var(--stroke);
+      background: rgba(0,0,0,.12);
+      color: var(--muted);
+      font-size: 12px;
+      width: fit-content;
+    }
+    @media (prefers-color-scheme: light){ .tag{background: rgba(255,255,255,.55)} }
+    .dot{width:8px;height:8px;border-radius:999px;background:var(--ok);box-shadow:0 0 0 4px rgba(46,229,157,.18)}
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 12px;
+    }
+    .card{
+      grid-column: span 6;
+      padding: 14px;
+      border-radius: var(--radius2);
+      border:1px solid var(--stroke);
+      background: linear-gradient(180deg, var(--card), var(--card2));
+      box-shadow: 0 14px 40px rgba(0,0,0,.22);
+    }
+    @media (max-width: 720px){ .card{grid-column: span 12;} }
+
+    .card h3{margin:0 0 8px; font-size: 15px;}
+    .card p{margin:0; color: var(--muted); font-size: 13px; line-height: 1.45;}
+    ul{margin: 10px 0 0; padding-left: 18px;}
+    li{margin: 6px 0; color: var(--text);}
+    .small{color: var(--muted); font-size: 12.5px; margin-top: 8px;}
+    .note{
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,.06);
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    footer{
+      margin-top: 14px;
+      text-align:center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    footer .credit{
+      display:inline-flex; gap:8px; align-items:center;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.06);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0,0,0,.16);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <!-- ARRIBA -->
+    <header class="top">
+      <div class="brand">
+        <div class="logo">🥣</div>
+        <div>
+          <h1>Rutina Alimenticia • Rupertíña (63 años)</h1>
+          <div class="sub">Sopa 1 + desayuno + cena (con gramos crudo y cocido)</div>
+          <div class="sub" style="margin-top:6px;">✅ Esta rutina puede mejorar salud y calidad de vida si se cumple constante, pero no puede garantizar una edad específica (como 120 años). La longevidad depende también de genética, control médico, actividad física, sueño y otros factores.</div>
+        </div>
+      </div>
+      <div class="creditPill">🏷️ <strong>Creador: Brayan Raudales</strong></div>
+    </header>
+
+    <!-- REGLAS DIARIAS -->
+    <section class="section">
+      <h2>✅ Reglas diarias <span class="tag"><span class="dot"></span> Importante</span></h2>
+      <div class="grid">
+        <div class="card">
+          <h3>No olvidar</h3>
+          <ul>
+            <li><b>Agua:</b> ~3 litros al día (subir solo si suda mucho o hace mucho calor).</li>
+            <li><b>Sal:</b> máximo <b>3.5 g</b> al día (tomar en cuenta la sal “oculta” en salsa/crema).</li>
+            <li><b>Centrum:</b> 1 diaria <b>después</b> de comer (desayuno o almuerzo).</li>
+          </ul>
+          <div class="note">🎯 Puedes combinar opciones (desayuno / sopa / cena). Lo importante es cumplir proteína + verduras + control de sal y agua.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DESAYUNO -->
+    <section class="section">
+      <h2>🍳 Desayuno <span class="tag"><span class="dot"></span> Diario</span></h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Opción (completa)</h3>
+          <ul>
+            <li><b>Arroz blanco:</b> 35–40 g crudo • ~105–120 g cocido</li>
+            <li><b>Frijoles:</b> 55–60 g secos (crudo) • ~150 g cocidos</li>
+            <li><b>Huevos:</b> 2 unidades (~100 g crudo) • ~95 g cocido</li>
+            <li><b>Espinaca:</b> 60 g cruda • 15–20 g cocida</li>
+            <li><b>Tomate:</b> 100 g crudo • 85–95 g cocido</li>
+            <li><b>Aguacate:</b> 70 g crudo</li>
+            <li><b>Banano:</b> ~160–200 g <span class="small">(con cáscara)</span> • 120–130 g <span class="small">(pelado)</span></li>          </ul>
+          <div class="note">💊 <b>Centrum:</b> 1 diaria <b>después</b> de comer (ideal con el desayuno o almuerzo). ☕ Si toma café cerca de la Centrum, mejor separarlos 1–2 horas.</div>
+        </div>
+
+        <div class="card">
+          <h3>Tip presión (bisoprolol)</h3>
+          <p>
+            Usar limón, ajo, cebolla, comino y orégano para sabor. La salsa de tomate y la crema ya traen sodio:
+            mejor <b>poca sal</b> agregada.
+          </p>
+          <p class="small">*Las cantidades “cocidas” son aproximadas (cambia por método de cocción).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOPAS -->
+    <section class="section">
+      <h2>🥣 Sopa 1 (frecuente) <span class="tag"><span class="dot"></span> Frecuente</span></h2>
+      <div class="grid"><div class="card">
+          <h3>🥘 Sopa 1: Pollo + repollo + pataste + zanahoria + elote</h3>
+          <ul>
+            <li><b>Pollo (sin piel):</b> 160 g crudo • 115–125 g cocido</li>
+            <li><b>Repollo:</b> 120 g crudo • 75–90 g cocido</li>
+            <li><b>Pataste:</b> 150 g crudo • 130–140 g cocido</li>
+            <li><b>Zanahoria:</b> 80 g cruda • 65–75 g cocida</li>
+            <li><b>Elote entero (sin hojas, con tusa):</b> ~200 g crudo • ~220–250 g cocido (aprox) <span class="small">(equivale a ~80–100 g de granos)</span></li>
+            <li><b>Tomate (caldo):</b> 150 g crudo • 130–145 g cocido</li>
+            <li><b>Agua/caldo:</b> 700–900 ml</li>
+            <li><b>(Opcional) Espagueti:</b> 30–40 g seco • 90–120 g cocido</li>
+          </ul>
+                            <div class="note">✅ <b>Recomendado:</b> <b>Cena Opción 2</b> (arroz normal: <b>40 g crudo</b> ≈ 120 g cocido). Si eliges Cena 1, baja pasta a <b>40–50 g seca</b> (≈ 120–150 g cocida).</div>
+        
+      </div>
+    </section>
+
+    <!-- CENA -->
+    <section class="section">
+      <h2>🍝 Cena <span class="tag"><span class="dot"></span> Rotar</span></h2>
+      <div class="note">☕ <b>Café:</b> 1 taza diaria con la cena <b>solo si no le quita el sueño</b>. Si la desvela o le da acidez, tomarlo más temprano o usar descafeinado.</div>
+
+      <div class="grid">
+        <div class="card">
+          <h3>✅ Cena perfecta para combinar con Sopa 1</h3>
+          <ul>
+            <li><b>Arroz blanco:</b> 40 g crudo • ~120 g cocido</li>
+            <li><b>Frijoles:</b> ~120 g cocidos <span class="small">(≈ 45–50 g secos)</span></li>
+            <li><b>Proteína:</b> 1 huevo (50 g crudo • ~48 g cocido)</li>
+            <li><b>Ensalada:</b> repollo 100 g + tomate 120 g + aguacate 50 g (todo crudo)</li>
+          </ul>
+          <div class="note">⚠️ Si en la Sopa 1 agregaste espagueti (30–40 g seco), mantén el arroz de la cena en 40 g crudo (no subir) y usa poca sal.</div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- RECOMENDACIONES FINALES -->
+    <section class="section">
+      <h2>📌 Recomendaciones para subir la probabilidad al máximo <span class="tag"><span class="dot"></span> Realista</span></h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Movimiento (sin complicarse)</h3>
+          <ul>
+            <li><b>Caminar:</b> 25–30 minutos, <b>5 días por semana</b>.</li>
+            <li><b>2 días/semana (fuerza suave):</b> <br>
+              • Sentarse y levantarse de una silla: <b>10–12 repeticiones</b><br>
+              • Empuje a pared: <b>10–12 repeticiones</b><br>
+              • Hacer <b>2–3 rondas</b>
+            </li>
+          </ul>
+          <div class="note">Esto protege músculo y hueso, y ayuda a presión, equilibrio y prevención de caídas.</div>
+        </div>
+
+        <div class="card">
+          <h3>Chequeos</h3>
+          <ul>
+            <li><b>Cada 6–12 meses:</b> presión, riñón, azúcar y lípidos (colesterol/triglicéridos).</li>
+            <li><b>Si hay síntomas</b> (mareos, debilidad, hinchazón, falta de aire): consultar antes.</li>
+          </ul>
+          <div class="note">La rutina ayuda, pero el control médico es lo que detecta problemas a tiempo.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABAJO -->
+    <footer>
+      <div class="credit">🏷️ <strong>Creador: Brayan Raudales</strong></div>
+    </footer>
+  </div>
+</body>
+</html>
